@@ -38,6 +38,8 @@ dependencies:
   flutter_riverpod: ^2.3.2
   flutter_signin_button: ^2.0.0
   connectivity_plus: ^3.0.4
+  firebase_auth: ^4.4.1
+  firebase_core: ^2.9.0
 
 dev_dependencies:
   flutter_test:
