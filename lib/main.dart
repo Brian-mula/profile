@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payroll/connection.dart';
 import 'package:payroll/views/auth/login.dart';
 import 'package:payroll/views/auth/register.dart';
 import 'package:payroll/views/home/homepage.dart';
@@ -18,11 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/login',
+      initialRoute: '/connection',
       routes: {
         '/': (context) => const HomePage(),
         '/login': (context) => const LoginView(),
-        '/register': (context) => const RegisterView()
+        '/register': (context) => const RegisterView(),
+        '/connection': (context) => const Connection()
       },
     );
   }
