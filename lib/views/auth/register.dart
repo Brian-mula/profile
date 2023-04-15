@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-class LoginView extends ConsumerStatefulWidget {
-  const LoginView({super.key});
+class RegisterView extends ConsumerStatefulWidget {
+  const RegisterView({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginViewState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RegisterViewState();
 }
 
-class _LoginViewState extends ConsumerState<LoginView> {
+class _RegisterViewState extends ConsumerState<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    TextEditingController usernameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     ThemeData theme = Theme.of(context);
@@ -42,7 +43,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 height: 30,
               ),
               Text(
-                "Welcome Back",
+                "Create a new account",
                 style: theme.textTheme.headlineLarge!
                     .copyWith(color: Colors.black87),
               ),
@@ -61,6 +62,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      TextFormField(
+                        cursorColor: Colors.orange.shade600,
+                        controller: usernameController,
+                        keyboardType: TextInputType.name,
+                        decoration: fieldDecoration("Username"),
+                      ),
                       const SizedBox(
                         height: 25,
                       ),
@@ -93,7 +100,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 elevation: const MaterialStatePropertyAll(0.0)),
                             onPressed: () {},
                             child: Text(
-                              "Login",
+                              "Register",
                               style: theme.textTheme.headlineMedium!
                                   .copyWith(color: Colors.white),
                             )),
@@ -107,16 +114,16 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account ? ",
+                    "Have an account ? ",
                     style: theme.textTheme.bodySmall!
                         .copyWith(color: Colors.black87),
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/register');
+                      Navigator.pushNamed(context, '/login');
                     },
                     child: Text(
-                      "Sign up ",
+                      "Sign in ",
                       style: theme.textTheme.bodyMedium!
                           .copyWith(color: Colors.orange.shade600),
                     ),
@@ -136,7 +143,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 7, right: 7),
-                    child: Text("or sign up with"),
+                    child: Text("or sign in with"),
                   ),
                   Container(
                     color: Colors.black26,
