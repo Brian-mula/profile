@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "364411832758",
+    "project_id": "epayroll-2e175",
+    "storage_bucket": "epayroll-2e175.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364411832758:android:f086b269d9d3ba60d9d917",
+        "android_client_info": {
+          "package_name": "com.example.payroll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364411832758-7brj80vmo74jcvv7agv28274si8ejp83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ8ZEKSav5cbYKA-orxwbp2rSLgWkmm44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364411832758-7brj80vmo74jcvv7agv28274si8ejp83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payroll/views/auth/login.dart';
 
 class Connection extends ConsumerStatefulWidget {
   const Connection({super.key});
@@ -62,10 +63,33 @@ class _ConnectionState extends ConsumerState<Connection> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Status: ${_connectionStatus.toString()}"),
-      ),
-    );
+    ThemeData theme = Theme.of(context);
+    if (_connectionStatus == ConnectivityResult.mobile ||
+        _connectionStatus == ConnectivityResult.wifi) {
+      return const LoginView();
+    } else {
+      return Scaffold(
+        body: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.wifi,
+                size: 40,
+                color: Colors.red.shade500,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                "You don't have active internet",
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Colors.red.shade500),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 }
