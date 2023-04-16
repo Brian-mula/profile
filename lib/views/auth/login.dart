@@ -106,9 +106,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Colors.orange.shade700),
                                 elevation: const MaterialStatePropertyAll(0.0)),
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                auth.signinWithEmail(emailController.text,
+                                await auth.signinWithEmail(emailController.text,
                                     passwordController.text, context);
                               }
                             },
@@ -176,7 +176,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     child: SignInButton(
                       Buttons.Google,
                       text: " Google",
-                      onPressed: () {},
+                      onPressed: () async {
+                        await auth.signinWithGoogle(context);
+                      },
                     ),
                   ),
                   SizedBox(

@@ -125,7 +125,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                     const SnackBar(
                                         content: Text("Processing data")));
 
-                                auth.signupWithEmail(emailController.text,
+                                await auth.signupWithEmail(emailController.text,
                                     passwordController.text, context);
                                 // if (auth.nexpage) {
                                 //   Navigator.pushNamed(context, '/');
@@ -196,7 +196,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     child: SignInButton(
                       Buttons.Google,
                       text: " Google",
-                      onPressed: () {},
+                      onPressed: () async {
+                        await auth.signinWithGoogle(context);
+                      },
                     ),
                   ),
                   SizedBox(
