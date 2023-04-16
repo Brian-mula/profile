@@ -5,7 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:payroll/views/auth/login.dart';
+import 'package:payroll/authChecker.dart';
 
 class Connection extends ConsumerStatefulWidget {
   const Connection({super.key});
@@ -66,7 +66,7 @@ class _ConnectionState extends ConsumerState<Connection> {
     ThemeData theme = Theme.of(context);
     if (_connectionStatus == ConnectivityResult.mobile ||
         _connectionStatus == ConnectivityResult.wifi) {
-      return const LoginView();
+      return const AuthChecker();
     } else {
       return Scaffold(
         body: Center(

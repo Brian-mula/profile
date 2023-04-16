@@ -86,18 +86,34 @@ class Authentication {
     final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
 
-      try{
+    try {
+      await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
+      await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text(
+                  "Error Occurred",
+                  style: theme.textTheme.bodyLarge!.copyWith(color: Colors.red),
+                ),
+                content: Text(
+                  e.toString(),
+                  style: theme.textTheme.bodyMedium,
+                ),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text("OK"))
+                ],
+              ));
+    }
+  }
 
-      }on FirebaseAuthException catch (e){
-        await showDialog(context: context, builder: (context)=>AlertDialog(
-          title: Text("Error Occurred",style: theme.textTheme.bodyLarge!.copyWith(color: Colors.red),),
-          content: Text(e.toString(),style: theme.textTheme.bodyMedium,),
-          actions: [
-            TextButton(onPressed: (){
-              Navigator.of(context).pop();
-            }, child: const Text("OK"))
-          ],
-        ))
-      }
+  // ! signout user
+  Future<void> signoutUser() async {
+    await _auth.signOut();
   }
 }
