@@ -13,6 +13,9 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: const Center(
+        child: Text("Junior"),
+      ),
     );
   }
 }

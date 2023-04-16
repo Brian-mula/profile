@@ -6,6 +6,7 @@ import 'package:payroll/firebase_options.dart';
 import 'package:payroll/views/auth/login.dart';
 import 'package:payroll/views/auth/register.dart';
 import 'package:payroll/views/home/homepage.dart';
+import 'package:payroll/views/home/main_home_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/connection',
       routes: {
-        '/': (context) => const HomePage(),
+        '/home': (context) => const HomePage(),
+        '/': (context) => const MainHomePage(),
         '/login': (context) => const LoginView(),
         '/register': (context) => const RegisterView(),
         '/connection': (context) => const Connection()

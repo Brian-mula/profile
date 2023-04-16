@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:payroll/providers/auth_providers.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
@@ -16,6 +17,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     ThemeData theme = Theme.of(context);
+
+    final auth = ref.watch(authProvider);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -69,6 +72,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: fieldDecoration("Email"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter email";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 25,
@@ -80,6 +89,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         keyboardType: TextInputType.text,
                         decoration:
                             fieldDecoration("Password", Icons.remove_red_eye),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter password";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 25,
@@ -91,7 +106,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Colors.orange.shade700),
                                 elevation: const MaterialStatePropertyAll(0.0)),
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                await auth.signinWithEmail(emailController.text,
+                                    passwordController.text, context);
+                              }
+                            },
                             child: Text(
                               "Login",
                               style: theme.textTheme.headlineMedium!
@@ -156,7 +176,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     child: SignInButton(
                       Buttons.Google,
                       text: " Google",
-                      onPressed: () {},
+                      onPressed: () async {
+                        await auth.signinWithGoogle(context);
+                      },
                     ),
                   ),
                   SizedBox(
