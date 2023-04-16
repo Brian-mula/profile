@@ -9,17 +9,22 @@ class AuthChecker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authState = ref.read(authStateProvider);
+    final authState = ref.watch(authStateProvider);
     return authState.when(
         data: (data) {
-          if (data != null) return const HomePage();
-          return const LoginView();
+          if (data == null) {
+            return const LoginView();
+          } else {
+            return const HomePage();
+          }
         },
         error: (e, trace) => Center(
               child: Text(e.toString()),
             ),
-        loading: () => const Center(
-              child: CircularProgressIndicator(),
+        loading: () => const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             ));
   }
 }

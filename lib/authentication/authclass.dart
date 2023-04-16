@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool nexpage = false;
 
   Stream<User?> get authStateChange => _auth.authStateChanges();
 
@@ -13,6 +14,7 @@ class Authentication {
     ThemeData theme = Theme.of(context);
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+      nexpage = true;
     } on FirebaseAuthException catch (e) {
       await showDialog(
           context: context,
@@ -44,6 +46,8 @@ class Authentication {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      nexpage = true;
     } on FirebaseAuthException catch (e) {
       await showDialog(
           context: context,
@@ -88,6 +92,7 @@ class Authentication {
 
     try {
       await _auth.signInWithCredential(credential);
+      nexpage = true;
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
       await showDialog(
@@ -115,5 +120,6 @@ class Authentication {
   // ! signout user
   Future<void> signoutUser() async {
     await _auth.signOut();
+    nexpage = false;
   }
 }

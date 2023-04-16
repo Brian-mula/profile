@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:payroll/providers/auth_providers.dart';
 
 class RegisterView extends ConsumerStatefulWidget {
   const RegisterView({super.key});
@@ -17,6 +18,8 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     ThemeData theme = Theme.of(context);
+
+    final auth = ref.watch(authProvider);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -67,6 +70,12 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         controller: usernameController,
                         keyboardType: TextInputType.name,
                         decoration: fieldDecoration("Username"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter the username";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 25,
@@ -76,6 +85,12 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: fieldDecoration("Email"),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter the email";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 25,
@@ -87,6 +102,12 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                         keyboardType: TextInputType.text,
                         decoration:
                             fieldDecoration("Password", Icons.remove_red_eye),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please enter password";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 25,
@@ -98,7 +119,19 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                 backgroundColor: MaterialStatePropertyAll(
                                     Colors.orange.shade700),
                                 elevation: const MaterialStatePropertyAll(0.0)),
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text("Processing data")));
+
+                                auth.signupWithEmail(emailController.text,
+                                    passwordController.text, context);
+                                // if (auth.nexpage) {
+                                //   Navigator.pushNamed(context, '/');
+                                // }
+                              }
+                            },
                             child: Text(
                               "Register",
                               style: theme.textTheme.headlineMedium!
