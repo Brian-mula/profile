@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:payroll/providers/auth_providers.dart';
 import 'package:payroll/views/auth/login.dart';
-import 'package:payroll/views/home/homepage.dart';
+import 'package:payroll/views/home/main_home_page.dart';
 
 class AuthChecker extends ConsumerWidget {
   const AuthChecker({super.key});
@@ -15,7 +15,7 @@ class AuthChecker extends ConsumerWidget {
           if (data == null) {
             return const LoginView();
           } else {
-            return const HomePage();
+            return const MainHomePage();
           }
         },
         error: (e, trace) => Center(

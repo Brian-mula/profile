@@ -26,6 +26,7 @@ class _MainHomePageState extends ConsumerState<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: pages[selectedItem],
       bottomNavigationBar: BottomNavigationBar(
         selectedLabelStyle: const TextStyle(color: Colors.black87),
         unselectedLabelStyle: const TextStyle(color: Colors.black45),
