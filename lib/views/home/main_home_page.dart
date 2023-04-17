@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payroll/views/home/accounts_page.dart';
 import 'package:payroll/views/home/homepage.dart';
 
 class MainHomePage extends ConsumerStatefulWidget {
@@ -10,11 +11,7 @@ class MainHomePage extends ConsumerStatefulWidget {
 }
 
 class _MainHomePageState extends ConsumerState<MainHomePage> {
-  List pages = [
-    const HomePage(),
-    const Text("Accounts"),
-    const Text("Settings")
-  ];
+  List pages = [const HomePage(), const Text("Accounts"), const AccounstView()];
 
   int selectedItem = 0;
   void _onTappedItem(int index) {
