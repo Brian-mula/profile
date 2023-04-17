@@ -125,8 +125,11 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                                     const SnackBar(
                                         content: Text("Processing data")));
 
-                                await auth.signupWithEmail(emailController.text,
-                                    passwordController.text, context);
+                                await auth.signupWithEmail(
+                                    emailController.text,
+                                    passwordController.text,
+                                    usernameController.text,
+                                    context);
                                 // if (auth.nexpage) {
                                 //   Navigator.pushNamed(context, '/');
                                 // }

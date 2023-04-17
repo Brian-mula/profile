@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:payroll/models/usersModel.dart';
+import 'package:payroll/providers/users_provider.dart';
 
 class Authentication {
+  final Ref ref;
+  Authentication(this.ref);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool nexpage = false;
 
@@ -40,12 +45,16 @@ class Authentication {
   }
   // !sign up the user using email and password
 
-  Future<void> signupWithEmail(
-      String email, String password, BuildContext context) async {
+  Future<void> signupWithEmail(String email, String password, String username,
+      BuildContext context) async {
     ThemeData theme = Theme.of(context);
+
+    final users = ref.watch(usersProvider);
     try {
+      UsersModel usersModel = UsersModel(email, username);
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      await users.addUser(usersModel);
 
       nexpage = true;
     } on FirebaseAuthException catch (e) {
