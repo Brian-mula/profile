@@ -7,7 +7,14 @@ class UsersController {
   CollectionReference users = FirebaseFirestore.instance.collection("users");
 
 // ! get a stream of all users
-  Stream get allUsers => _firestore.collection('users').snapshots();
+  // Stream get allUsers => _firestore.collection('users').snapshots();
+  Stream<List<UsersModel>> allUser() {
+    return users.snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return UsersModel.fromJson(doc as Map<String, dynamic>);
+      }).toList();
+    });
+  }
 
 // ! add a new user
 // will usually take place during registration

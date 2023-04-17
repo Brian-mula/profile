@@ -51,7 +51,7 @@ class Authentication {
 
     final users = ref.watch(usersProvider);
     try {
-      UsersModel usersModel = UsersModel(email, username);
+      UsersModel usersModel = UsersModel(email: email, username: username);
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       await users.addUser(usersModel);
