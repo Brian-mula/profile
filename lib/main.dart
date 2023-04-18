@@ -5,6 +5,7 @@ import 'package:payroll/connection.dart';
 import 'package:payroll/firebase_options.dart';
 import 'package:payroll/views/auth/login.dart';
 import 'package:payroll/views/auth/register.dart';
+import 'package:payroll/views/home/employee_details.dart';
 import 'package:payroll/views/home/homepage.dart';
 import 'package:payroll/views/home/main_home_page.dart';
 
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MainHomePage(),
         '/login': (context) => const LoginView(),
         '/register': (context) => const RegisterView(),
-        '/connection': (context) => const Connection()
+        '/connection': (context) => const Connection(),
+        '/employee-details': (context) => const EmployeeDetails()
       },
     );
   }
