@@ -13,17 +13,27 @@ class Employees extends ConsumerStatefulWidget {
 class _EmployeesState extends ConsumerState<Employees> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          bottom: const TabBar(tabs: [
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+          bottom: TabBar(indicatorColor: Colors.blue.shade500, tabs: [
             Tab(
-              text: "Employees",
+              child: Text(
+                "Employees",
+                style: theme.textTheme.bodyLarge,
+              ),
             ),
             Tab(
-              text: "Users",
-            )
+              child: Text(
+                "Users",
+                style: theme.textTheme.bodyLarge,
+              ),
+            ),
           ]),
         ),
         body: const TabBarView(children: [EmployeesTab(), UsersTab()]),
