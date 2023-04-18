@@ -26,12 +26,17 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                        padding: const EdgeInsets.only(
-                          left: 10,
-                          right: 10,
-                        ),
-                        child: const Icon(Icons.arrow_back_ios_new_sharp)),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/main-home');
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            right: 10,
+                          ),
+                          child: const Icon(Icons.arrow_back_ios_new_sharp)),
+                    ),
                     Container(
                       padding: const EdgeInsets.only(left: 5, right: 5),
                       child: Text(
@@ -135,6 +140,107 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                         "https://images.unsplash.com/photo-1578489758854-f134a358f08b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTUzfHxwcm9maWxlJTIwcGhvdG98ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
                     radius: 45,
                   )),
+              Positioned(
+                  top: 470,
+                  left: 10,
+                  right: 10,
+                  child: SizedBox(
+                    height: 80,
+                    width: double.maxFinite,
+                    child: Card(
+                        color: Colors.grey.shade200,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 10,
+                            right: 10,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Time off",
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "02",
+                                    style: theme.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Attendance",
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "31",
+                                    style: theme.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Overtime",
+                                    style: theme.textTheme.bodyLarge,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "08",
+                                    style: theme.textTheme.bodyMedium,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )),
+                  )),
+              Positioned(
+                  top: 570,
+                  left: 10,
+                  right: 10,
+                  child: SizedBox(
+                    height: 60,
+                    child: Card(
+                      color: Colors.grey.shade300,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10, right: 10, top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.account_balance_wallet,
+                              color: Colors.pink.shade600,
+                              size: 36,
+                            ),
+                            Text(
+                              "Ksh.40000",
+                              style: theme.textTheme.bodyLarge!
+                                  .copyWith(color: Colors.pink.shade600),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ))
             ],
           )),
     );

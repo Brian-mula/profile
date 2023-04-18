@@ -20,7 +20,7 @@ class _EmployeesTabState extends ConsumerState<EmployeesTab> {
                 margin: const EdgeInsets.only(bottom: 12),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, 'employee-details');
+                    Navigator.pushNamed(context, '/employee-details');
                   },
                   child: Card(
                     child: ListTile(
