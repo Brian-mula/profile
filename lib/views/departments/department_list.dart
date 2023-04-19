@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payroll/widgets/department.dart';
 
 class Departments extends ConsumerStatefulWidget {
   const Departments({super.key});
@@ -30,6 +31,7 @@ class _DepartmentsState extends ConsumerState<Departments> {
             const SizedBox(
               height: 30,
             ),
+            const DepartmentList()
           ],
         ),
       ),
