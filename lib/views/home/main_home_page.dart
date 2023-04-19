@@ -23,6 +23,7 @@ class _MainHomePageState extends ConsumerState<MainHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Scaffold(
       body: pages[selectedItem],
       bottomNavigationBar: BottomNavigationBar(
