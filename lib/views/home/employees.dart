@@ -17,17 +17,22 @@ class _EmployeesState extends ConsumerState<Employees> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        floatingActionButton: Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.orange.shade600),
-          child: const Center(
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 30,
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/new-employee');
+          },
+          child: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.orange.shade600),
+            child: const Center(
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 30,
+              ),
             ),
           ),
         ),
