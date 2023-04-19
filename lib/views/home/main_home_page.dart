@@ -72,7 +72,7 @@ class _MainHomePageState extends ConsumerState<MainHomePage> {
             ),
             ListTile(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/employees');
               },
               leading: Icon(Icons.people, color: Colors.orange.shade600),
               title: Text(
@@ -86,7 +86,7 @@ class _MainHomePageState extends ConsumerState<MainHomePage> {
             ),
             ListTile(
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/departments');
               },
               leading: Icon(Icons.card_travel, color: Colors.orange.shade600),
               title: Text(

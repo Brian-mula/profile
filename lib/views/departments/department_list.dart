@@ -13,6 +13,25 @@ class _DepartmentsState extends ConsumerState<Departments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/new-department');
+        },
+        child: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.orange.shade600),
+          child: const Center(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        ),
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
         child: Column(
