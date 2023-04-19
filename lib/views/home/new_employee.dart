@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,6 +21,10 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
     TextEditingController salary = TextEditingController();
     TextEditingController category = TextEditingController();
     ThemeData theme = Theme.of(context);
+
+    List<String> categories = ["Full time", "Part time", "Intern"];
+
+    String? selectedCat;
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -103,10 +108,50 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                       const SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        controller: category,
-                        keyboardType: TextInputType.number,
-                        decoration: fieldDecoration("Category"),
+                      DropdownButtonFormField2(
+                        decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.orange.shade600))),
+                        isExpanded: true,
+                        hint: Text(
+                          "Select category",
+                          style: theme.textTheme.bodyMedium!
+                              .copyWith(color: Colors.orange.shade600),
+                        ),
+                        items: categories
+                            .map((cat) => DropdownMenuItem<String>(
+                                  value: cat,
+                                  child: Text(
+                                    cat,
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                        color: Colors.orange.shade600),
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedCat = value;
+                          });
+                        },
+                        dropdownStyleData: DropdownStyleData(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6))),
+                        buttonStyleData: ButtonStyleData(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                            )),
+                        iconStyleData: IconStyleData(
+                            icon: Icon(
+                          Icons.arrow_drop_down,
+                          size: 30,
+                          color: Colors.orange.shade600,
+                        )),
                       ),
                       const SizedBox(
                         height: 20,
