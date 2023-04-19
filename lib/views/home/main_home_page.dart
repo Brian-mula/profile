@@ -42,66 +42,57 @@ class _MainHomePageState extends ConsumerState<MainHomePage> {
             const SizedBox(
               height: 60,
             ),
-            GestureDetector(
+            ListTile(
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
-              child: ListTile(
-                leading:
-                    Icon(Icons.home_outlined, color: Colors.orange.shade600),
-                title: Text(
-                  "Dashboard",
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: Colors.orange.shade600),
-                ),
+              leading: Icon(Icons.home_outlined, color: Colors.orange.shade600),
+              title: Text(
+                "Dashboard",
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Colors.orange.shade600),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
+            ListTile(
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
-              child: ListTile(
-                leading: Icon(Icons.add, color: Colors.orange.shade600),
-                title: Text(
-                  "New Employee",
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: Colors.orange.shade600),
-                ),
+              leading: Icon(Icons.add, color: Colors.orange.shade600),
+              title: Text(
+                "New Employee",
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Colors.orange.shade600),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
+            ListTile(
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
-              child: ListTile(
-                leading: Icon(Icons.people, color: Colors.orange.shade600),
-                title: Text(
-                  "All Employees",
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: Colors.orange.shade600),
-                ),
+              leading: Icon(Icons.people, color: Colors.orange.shade600),
+              title: Text(
+                "All Employees",
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Colors.orange.shade600),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
+            ListTile(
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
               },
-              child: ListTile(
-                leading: Icon(Icons.card_travel, color: Colors.orange.shade600),
-                title: Text(
-                  "Departments",
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: Colors.orange.shade600),
-                ),
+              leading: Icon(Icons.card_travel, color: Colors.orange.shade600),
+              title: Text(
+                "Departments",
+                style: theme.textTheme.bodyLarge!
+                    .copyWith(color: Colors.orange.shade600),
               ),
             ),
           ],
