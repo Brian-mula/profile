@@ -32,26 +32,29 @@ class _DepartmentsState extends ConsumerState<Departments> {
           ),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: "Search in departments...",
-                  suffixIcon: const Icon(Icons.search),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.orange.shade600)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.orange.shade600))),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const DepartmentList()
-          ],
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Container(
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: "Search in departments...",
+                    suffixIcon: const Icon(Icons.search),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.orange.shade600)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.orange.shade600))),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const DepartmentList()
+            ],
+          ),
         ),
       ),
     );

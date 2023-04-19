@@ -13,6 +13,7 @@ class _DepartmentListState extends ConsumerState<DepartmentList> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Container(
+      height: 750,
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: ListView.builder(
           itemCount: 10,
