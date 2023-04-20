@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payroll/models/department_model.dart';
+import 'package:payroll/providers/departments_provider.dart';
 
 class NewDepartment extends ConsumerStatefulWidget {
   const NewDepartment({super.key});
@@ -16,6 +18,8 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
     ThemeData theme = Theme.of(context);
     TextEditingController name = TextEditingController();
     TextEditingController chairperson = TextEditingController();
+
+    final departments = ref.watch(departmentsProvider);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(
@@ -57,6 +61,12 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                     TextFormField(
                       controller: name,
                       decoration: fieldDecoration("e.g Marketing"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Provide department";
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -64,6 +74,12 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                     TextFormField(
                       controller: chairperson,
                       decoration: fieldDecoration("Chairman"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "provider chairperson";
+                        }
+                        return null;
+                      },
                     ),
                     const SizedBox(
                       height: 20,
@@ -75,7 +91,14 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                               backgroundColor: MaterialStateProperty.all(
                                   Colors.orange.shade600),
                               elevation: MaterialStateProperty.all(0.0)),
-                          onPressed: () {},
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              DepartmentModel departmentModel = DepartmentModel(
+                                  chairman: chairperson.text, name: name.text);
+
+                              await departments.newDepartment(departmentModel);
+                            }
+                          },
                           child: const Text("Add Department")),
                     )
                   ],
