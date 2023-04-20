@@ -11,7 +11,8 @@ class UsersController {
   Stream<List<UsersModel>> allUser() {
     return users.snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
-        return UsersModel.fromJson(doc as Map<String, dynamic>);
+        return UsersModel.fromJson(
+            doc as DocumentSnapshot<Map<String, dynamic>>);
       }).toList();
     });
   }
