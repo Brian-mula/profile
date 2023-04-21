@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:payroll/providers/departments_provider.dart';
 import 'package:payroll/widgets/department.dart';
 
 class Departments extends ConsumerStatefulWidget {
@@ -12,51 +14,63 @@ class Departments extends ConsumerStatefulWidget {
 class _DepartmentsState extends ConsumerState<Departments> {
   @override
   Widget build(BuildContext context) {
+    final alldepartments = ref.watch(allDepartmentsProvider);
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, '/new-department');
-        },
-        child: Container(
-          height: 40,
-          width: 40,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.orange.shade600),
-          child: const Center(
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 30,
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/new-department');
+          },
+          child: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.orange.shade600),
+            child: const Center(
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 30,
+              ),
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: "Search in departments...",
-                    suffixIcon: const Icon(Icons.search),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.orange.shade600)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(color: Colors.orange.shade600))),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const DepartmentList()
-            ],
-          ),
-        ),
-      ),
-    );
+        body: alldepartments.when(
+            data: (departments) => SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Container(
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, top: 60),
+                    child: Column(
+                      children: [
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       labelText: "Search in departments...",
+                        //       suffixIcon: const Icon(Icons.search),
+                        //       enabledBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(20),
+                        //           borderSide: BorderSide(
+                        //               color: Colors.orange.shade600)),
+                        //       focusedBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(20),
+                        //           borderSide: BorderSide(
+                        //               color: Colors.orange.shade600))),
+                        // ),
+                        // const SizedBox(
+                        //   height: 30,
+                        // ),
+                        DepartmentList(
+                          departments: departments,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            error: (err, stackTrace) => Text(err.toString()),
+            loading: () => Center(
+                child: LoadingAnimationWidget.flickr(
+                    leftDotColor: const Color(0xFF0063DC),
+                    rightDotColor: const Color(0xFFFF0084),
+                    size: 100))));
   }
 }

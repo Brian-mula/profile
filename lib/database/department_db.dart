@@ -35,6 +35,7 @@ class DepartmentController {
   Future<void> editDepartment(
       DepartmentModel departmentModel, String id) async {
     try {
+      print(id);
       await _departments.doc(id).update(departmentModel.toFirestore());
     } catch (e) {
       print(e.toString());

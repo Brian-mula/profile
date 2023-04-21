@@ -6,17 +6,17 @@ import 'package:payroll/models/department_model.dart';
 import 'package:payroll/providers/departments_provider.dart';
 import 'package:payroll/providers/users_provider.dart';
 
-class NewDepartment extends ConsumerStatefulWidget {
-  const NewDepartment({super.key});
+class EditDepartment extends ConsumerStatefulWidget {
+  const EditDepartment({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _NewDepartmentState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditDepartmentState();
 }
 
-class _NewDepartmentState extends ConsumerState<NewDepartment> {
+class _EditDepartmentState extends ConsumerState<EditDepartment> {
   final _formKey = GlobalKey<FormState>();
-  String selectedchair = '';
-  bool _isLoading = false;
+  String? selectedchair;
+  final bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -26,7 +26,7 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
     final departments = ref.watch(departmentsProvider);
 
     final allUsers = ref.watch(allUsersProvider);
-
+    final args = ModalRoute.of(context)!.settings.arguments as DepartmentModel;
     return Scaffold(
         body: allUsers.when(
             data: (users) => Container(
@@ -77,7 +77,7 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                             color: Colors.orange.shade600))),
                                 isExpanded: true,
                                 hint: Text(
-                                  "Select chair",
+                                  args.chairman!,
                                   style: theme.textTheme.bodyMedium!
                                       .copyWith(color: Colors.orange.shade600),
                                 ),
@@ -85,7 +85,7 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                     .map((user) => DropdownMenuItem<String>(
                                           value: user.username,
                                           child: Text(
-                                            user.username!,
+                                            user.username,
                                             style: theme.textTheme.bodyMedium!
                                                 .copyWith(
                                                     color:
@@ -119,7 +119,7 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                               ),
                               TextFormField(
                                 controller: name,
-                                decoration: fieldDecoration("e.g Marketing"),
+                                decoration: fieldDecoration("e.g ${args.name}"),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return "Provide department";
@@ -127,18 +127,6 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                   return null;
                                 },
                               ),
-
-                              // TextFormField(
-                              //   controller: chairperson,
-                              //   decoration: fieldDecoration("Chairman"),
-                              //   validator: (value) {
-                              //     if (value == null || value.isEmpty) {
-                              //       return "provider chairperson";
-                              //     }
-                              //     return null;
-                              //   },
-                              // ),
-
                               const SizedBox(
                                 height: 30,
                               ),
@@ -155,14 +143,15 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                       if (_formKey.currentState!.validate()) {
                                         DepartmentModel departmentModel =
                                             DepartmentModel(
-                                                chairman: selectedchair,
+                                                chairman: selectedchair ??
+                                                    args.chairman,
                                                 name: name.text);
 
-                                        await departments
-                                            .newDepartment(departmentModel);
-                                        setState(() {
-                                          _isLoading = true;
-                                        });
+                                        await departments.editDepartment(
+                                            departmentModel, args.id!);
+                                        // setState(() {
+                                        //   _isLoading = true;
+                                        // });
                                         Navigator.pushNamed(
                                             context, '/departments');
                                       }

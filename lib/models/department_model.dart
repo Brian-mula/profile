@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DepartmentModel {
   String? id;
-  String name;
-  String chairman;
+  String? name;
+  String? chairman;
 
   DepartmentModel({this.id, required this.chairman, required this.name});
 
