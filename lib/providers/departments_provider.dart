@@ -6,6 +6,6 @@ final departmentsProvider = Provider<DepartmentController>((ref) {
   return DepartmentController();
 });
 
-final allDepartments = StreamProvider<List<DepartmentModel>>((ref) {
+final allDepartmentsProvider = StreamProvider<List<DepartmentModel>>((ref) {
   return ref.read(departmentsProvider).allDepartments();
 });
