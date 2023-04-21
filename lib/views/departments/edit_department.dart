@@ -15,7 +15,7 @@ class EditDepartment extends ConsumerStatefulWidget {
 
 class _EditDepartmentState extends ConsumerState<EditDepartment> {
   final _formKey = GlobalKey<FormState>();
-  String selectedchair = '';
+  String? selectedchair;
   bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -26,6 +26,7 @@ class _EditDepartmentState extends ConsumerState<EditDepartment> {
     final departments = ref.watch(departmentsProvider);
 
     final allUsers = ref.watch(allUsersProvider);
+    final args = ModalRoute.of(context)!.settings.arguments as DepartmentModel;
     return Scaffold(
         body: allUsers.when(
             data: (users) => Container(
@@ -76,7 +77,7 @@ class _EditDepartmentState extends ConsumerState<EditDepartment> {
                                             color: Colors.orange.shade600))),
                                 isExpanded: true,
                                 hint: Text(
-                                  "Select chair",
+                                  args.chairman!,
                                   style: theme.textTheme.bodyMedium!
                                       .copyWith(color: Colors.orange.shade600),
                                 ),
@@ -118,7 +119,7 @@ class _EditDepartmentState extends ConsumerState<EditDepartment> {
                               ),
                               TextFormField(
                                 controller: name,
-                                decoration: fieldDecoration("e.g Marketing"),
+                                decoration: fieldDecoration("e.g ${args.name}"),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return "Provide department";
@@ -142,11 +143,12 @@ class _EditDepartmentState extends ConsumerState<EditDepartment> {
                                       if (_formKey.currentState!.validate()) {
                                         DepartmentModel departmentModel =
                                             DepartmentModel(
-                                                chairman: selectedchair,
+                                                chairman: selectedchair ??
+                                                    args.chairman,
                                                 name: name.text);
 
-                                        await departments
-                                            .newDepartment(departmentModel);
+                                        await departments.editDepartment(
+                                            departmentModel, args.id!);
                                         setState(() {
                                           _isLoading = true;
                                         });

@@ -15,7 +15,7 @@ class _DepartmentListState extends ConsumerState<DepartmentList> {
     setState(() {
       widget.departments
           .where((department) =>
-              department.name.toLowerCase().contains(value.toLowerCase()))
+              department.name!.toLowerCase().contains(value.toLowerCase()))
           .toList();
     });
   }
@@ -23,6 +23,7 @@ class _DepartmentListState extends ConsumerState<DepartmentList> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: Column(
@@ -43,19 +44,25 @@ class _DepartmentListState extends ConsumerState<DepartmentList> {
             height: 750,
             child: ListView.builder(
                 itemCount: widget.departments.length,
-                itemBuilder: (context, index) => Container(
-                      margin: const EdgeInsets.only(bottom: 15),
-                      child: Card(
-                        child: ListTile(
-                          title: Text(
-                            widget.departments[index].name,
-                            style: theme.textTheme.bodyLarge,
+                itemBuilder: (context, index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/edit-department',
+                            arguments: widget.departments[index]);
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 15),
+                        child: Card(
+                          child: ListTile(
+                            title: Text(
+                              widget.departments[index].name!,
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                            subtitle: Text(
+                              widget.departments[index].chairman!,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                            trailing: const Icon(Icons.arrow_forward_ios),
                           ),
-                          subtitle: Text(
-                            widget.departments[index].chairman,
-                            style: theme.textTheme.bodySmall,
-                          ),
-                          trailing: const Icon(Icons.arrow_forward_ios),
                         ),
                       ),
                     )),

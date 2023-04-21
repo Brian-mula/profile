@@ -6,6 +6,7 @@ import 'package:payroll/firebase_options.dart';
 import 'package:payroll/views/auth/login.dart';
 import 'package:payroll/views/auth/register.dart';
 import 'package:payroll/views/departments/department_list.dart';
+import 'package:payroll/views/departments/edit_department.dart';
 import 'package:payroll/views/departments/new_department.dart';
 import 'package:payroll/views/home/employee_details.dart';
 import 'package:payroll/views/home/employees.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
         '/new-employee': (context) => const NewEmployee(),
         '/departments': (context) => const Departments(),
         '/new-department': (context) => const NewDepartment(),
-        '/employees': (context) => const Employees()
+        '/employees': (context) => const Employees(),
+        '/edit-department': (context) => const EditDepartment()
       },
     );
   }
