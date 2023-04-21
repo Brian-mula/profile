@@ -43,37 +43,22 @@ class _DepartmentsState extends ConsumerState<Departments> {
                         const EdgeInsets.only(left: 10, right: 10, top: 60),
                     child: Column(
                       children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Search in departments...",
-                              suffixIcon: const Icon(Icons.search),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(
-                                      color: Colors.orange.shade600)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  borderSide: BorderSide(
-                                      color: Colors.orange.shade600))),
-                          onChanged: (value) {
-                            ref.read(allDepartmentsProvider).whenData(
-                                (departments) => departments.where(
-                                    (department) => department.name
-                                        .toLowerCase()
-                                        .contains(value.toLowerCase())));
-                          },
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        SizedBox(
-                          height: 100,
-                          child: ListView.builder(
-                              itemCount: departments.length,
-                              itemBuilder: (context, index) {
-                                return Text(departments[index].name);
-                              }),
-                        ),
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       labelText: "Search in departments...",
+                        //       suffixIcon: const Icon(Icons.search),
+                        //       enabledBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(20),
+                        //           borderSide: BorderSide(
+                        //               color: Colors.orange.shade600)),
+                        //       focusedBorder: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(20),
+                        //           borderSide: BorderSide(
+                        //               color: Colors.orange.shade600))),
+                        // ),
+                        // const SizedBox(
+                        //   height: 30,
+                        // ),
                         DepartmentList(
                           departments: departments,
                         ),
