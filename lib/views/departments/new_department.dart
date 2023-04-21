@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:payroll/models/department_model.dart';
 import 'package:payroll/providers/departments_provider.dart';
 import 'package:payroll/providers/users_provider.dart';
@@ -14,7 +15,8 @@ class NewDepartment extends ConsumerStatefulWidget {
 
 class _NewDepartmentState extends ConsumerState<NewDepartment> {
   final _formKey = GlobalKey<FormState>();
-
+  String selectedchair = '';
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -25,7 +27,6 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
 
     final allUsers = ref.watch(allUsersProvider);
 
-    String? selectedchair;
     return Scaffold(
         body: allUsers.when(
             data: (users) => Container(
@@ -65,32 +66,6 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                           key: _formKey,
                           child: Column(
                             children: [
-                              TextFormField(
-                                controller: name,
-                                decoration: fieldDecoration("e.g Marketing"),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Provide department";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              TextFormField(
-                                controller: chairperson,
-                                decoration: fieldDecoration("Chairman"),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "provider chairperson";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               DropdownButtonFormField2(
                                 decoration: InputDecoration(
                                     isDense: true,
@@ -118,9 +93,9 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                           ),
                                         ))
                                     .toList(),
-                                onChanged: (value) {
+                                onChanged: (String? value) {
                                   setState(() {
-                                    selectedchair = value;
+                                    selectedchair = value!;
                                   });
                                 },
                                 dropdownStyleData: DropdownStyleData(
@@ -140,6 +115,31 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                 )),
                               ),
                               const SizedBox(
+                                height: 20,
+                              ),
+                              TextFormField(
+                                controller: name,
+                                decoration: fieldDecoration("e.g Marketing"),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Provide department";
+                                  }
+                                  return null;
+                                },
+                              ),
+
+                              // TextFormField(
+                              //   controller: chairperson,
+                              //   decoration: fieldDecoration("Chairman"),
+                              //   validator: (value) {
+                              //     if (value == null || value.isEmpty) {
+                              //       return "provider chairperson";
+                              //     }
+                              //     return null;
+                              //   },
+                              // ),
+
+                              const SizedBox(
                                 height: 30,
                               ),
                               SizedBox(
@@ -155,14 +155,26 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                       if (_formKey.currentState!.validate()) {
                                         DepartmentModel departmentModel =
                                             DepartmentModel(
-                                                chairman: selectedchair!,
+                                                chairman: selectedchair,
                                                 name: name.text);
 
                                         await departments
                                             .newDepartment(departmentModel);
+                                        setState(() {
+                                          _isLoading = true;
+                                        });
+                                        Navigator.pushNamed(
+                                            context, '/departments');
                                       }
                                     },
-                                    child: const Text("Add Department")),
+                                    child: _isLoading
+                                        ? LoadingAnimationWidget.flickr(
+                                            leftDotColor:
+                                                const Color(0xFF0063DC),
+                                            rightDotColor:
+                                                const Color(0xFFFF0084),
+                                            size: 50)
+                                        : const Text("Add Department")),
                               )
                             ],
                           ))
