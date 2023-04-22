@@ -46,8 +46,10 @@ class _DepartmentListState extends ConsumerState<DepartmentList> {
                 itemCount: widget.departments.length,
                 itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/edit-department',
-                            arguments: widget.departments[index]);
+                        if (mounted) {
+                          Navigator.pushNamed(context, '/edit-department',
+                              arguments: widget.departments[index]);
+                        }
                       },
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 15),

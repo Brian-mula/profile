@@ -16,7 +16,7 @@ class EditDepartment extends ConsumerStatefulWidget {
 class _EditDepartmentState extends ConsumerState<EditDepartment> {
   final _formKey = GlobalKey<FormState>();
   String? selectedchair;
-  bool _isLoading = false;
+  final bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -149,9 +149,9 @@ class _EditDepartmentState extends ConsumerState<EditDepartment> {
 
                                         await departments.editDepartment(
                                             departmentModel, args.id!);
-                                        setState(() {
-                                          _isLoading = true;
-                                        });
+                                        // setState(() {
+                                        //   _isLoading = true;
+                                        // });
                                         Navigator.pushNamed(
                                             context, '/departments');
                                       }
