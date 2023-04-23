@@ -1,8 +1,11 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:payroll/models/employees_model.dart';
 import 'package:payroll/providers/departments_provider.dart';
+import 'package:payroll/providers/employees_provider.dart';
 
 class NewEmployee extends ConsumerStatefulWidget {
   const NewEmployee({super.key});
@@ -14,22 +17,22 @@ class NewEmployee extends ConsumerStatefulWidget {
 class _NewEmployeeState extends ConsumerState<NewEmployee> {
   final _formKey = GlobalKey<FormState>();
   String? selectedDep;
-
+  List<String> categories = ["Full time", "Part time", "Intern"];
+  String? selectedCat;
   @override
   Widget build(BuildContext context) {
     TextEditingController fullname = TextEditingController();
     TextEditingController idNumber = TextEditingController();
     TextEditingController phone = TextEditingController();
     TextEditingController jobNumber = TextEditingController();
-    TextEditingController department = TextEditingController();
+    TextEditingController email = TextEditingController();
     TextEditingController salary = TextEditingController();
-    TextEditingController category = TextEditingController();
+    TextEditingController role = TextEditingController();
     ThemeData theme = Theme.of(context);
 
-    List<String> categories = ["Full time", "Part time", "Intern"];
     final departments = ref.watch(allDepartmentsProvider);
+    final employee = ref.watch(employeesProvider);
 
-    String? selectedCat;
     return Scaffold(
       body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -71,6 +74,12 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                 TextFormField(
                                   controller: fullname,
                                   decoration: fieldDecoration("Full name"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "please enter full name";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -79,6 +88,12 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                   controller: idNumber,
                                   keyboardType: TextInputType.number,
                                   decoration: fieldDecoration("ID number"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Please fill out the ID field";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -87,6 +102,12 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                   controller: phone,
                                   keyboardType: TextInputType.phone,
                                   decoration: fieldDecoration("Phone"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "provide phone number";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -95,6 +116,12 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                   controller: jobNumber,
                                   keyboardType: TextInputType.text,
                                   decoration: fieldDecoration("Job Number"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Provide job number";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -155,6 +182,41 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                   controller: salary,
                                   keyboardType: TextInputType.number,
                                   decoration: fieldDecoration("Salary"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Provide agreed salary";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: email,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: fieldDecoration("e.g a@b.com"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Provide email address";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: role,
+                                  keyboardType: TextInputType.text,
+                                  decoration:
+                                      fieldDecoration("e.g data dealers"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Provide agreed role";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -220,7 +282,26 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                                   Colors.orange.shade600),
                                           elevation:
                                               MaterialStateProperty.all(0.0)),
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          EmployeesModel employeesModel =
+                                              EmployeesModel(
+                                                  category: selectedCat!,
+                                                  fullName: fullname.text,
+                                                  date: DateFormat('yyyy-MM-dd')
+                                                      .format(DateTime.now()),
+                                                  department: selectedDep!,
+                                                  email: email.text,
+                                                  idNumber: idNumber.text,
+                                                  jobNo: jobNumber.text,
+                                                  phone: phone.text,
+                                                  role: role.text,
+                                                  salary: double.parse(
+                                                      salary.text));
+                                          await employee
+                                              .newEmployee(employeesModel);
+                                        }
+                                      },
                                       child: const Text("Add Employee")),
                                 )
                               ],
