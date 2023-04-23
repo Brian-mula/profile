@@ -242,7 +242,18 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                         ),
                       ),
                     ),
-                  ))
+                  )),
+              Positioned(
+                  bottom: 30,
+                  left: 100,
+                  right: 100,
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.orange.shade600,
+                        size: 30,
+                      )))
             ],
           )),
     );
