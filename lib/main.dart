@@ -8,11 +8,12 @@ import 'package:payroll/views/auth/register.dart';
 import 'package:payroll/views/departments/department_list.dart';
 import 'package:payroll/views/departments/edit_department.dart';
 import 'package:payroll/views/departments/new_department.dart';
-import 'package:payroll/views/home/employee_details.dart';
-import 'package:payroll/views/home/employees.dart';
+import 'package:payroll/views/employeess/edit_employee.dart';
+import 'package:payroll/views/employeess/employee_details.dart';
+import 'package:payroll/views/employeess/employees.dart';
+import 'package:payroll/views/employeess/new_employee.dart';
 import 'package:payroll/views/home/homepage.dart';
 import 'package:payroll/views/home/main_home_page.dart';
-import 'package:payroll/views/home/new_employee.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
         '/departments': (context) => const Departments(),
         '/new-department': (context) => const NewDepartment(),
         '/employees': (context) => const Employees(),
-        '/edit-department': (context) => const EditDepartment()
+        '/edit-department': (context) => const EditDepartment(),
+        'edit-employee': (context) => const EditEmployee()
       },
     );
   }

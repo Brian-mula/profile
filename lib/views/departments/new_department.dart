@@ -85,7 +85,7 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                     .map((user) => DropdownMenuItem<String>(
                                           value: user.username,
                                           child: Text(
-                                            user.username!,
+                                            user.username,
                                             style: theme.textTheme.bodyMedium!
                                                 .copyWith(
                                                     color:
@@ -127,18 +127,6 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                   return null;
                                 },
                               ),
-
-                              // TextFormField(
-                              //   controller: chairperson,
-                              //   decoration: fieldDecoration("Chairman"),
-                              //   validator: (value) {
-                              //     if (value == null || value.isEmpty) {
-                              //       return "provider chairperson";
-                              //     }
-                              //     return null;
-                              //   },
-                              // ),
-
                               const SizedBox(
                                 height: 30,
                               ),
