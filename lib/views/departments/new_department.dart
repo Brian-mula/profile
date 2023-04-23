@@ -85,7 +85,7 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                     .map((user) => DropdownMenuItem<String>(
                                           value: user.username,
                                           child: Text(
-                                            user.username!,
+                                            user.username,
                                             style: theme.textTheme.bodyMedium!
                                                 .copyWith(
                                                     color:
