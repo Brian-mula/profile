@@ -19,7 +19,7 @@ class _EmployeesTabState extends ConsumerState<EmployeesTab> {
         padding: const EdgeInsets.only(left: 10, right: 10),
         child: employees.when(
             data: (employee) => ListView.builder(
-                itemCount: 10,
+                itemCount: employee.length,
                 itemBuilder: (context, index) => Container(
                       margin: const EdgeInsets.only(bottom: 12),
                       child: GestureDetector(

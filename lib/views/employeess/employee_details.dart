@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:payroll/models/employees_model.dart';
 
 class EmployeeDetails extends ConsumerStatefulWidget {
   const EmployeeDetails({super.key});
@@ -13,6 +14,7 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    final args = ModalRoute.of(context)!.settings.arguments as EmployeesModel;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -64,7 +66,7 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                           height: 80,
                         ),
                         Text(
-                          "John Doe",
+                          args.fullName,
                           style: theme.textTheme.headlineMedium!
                               .copyWith(color: Colors.black87),
                         ),
@@ -77,17 +79,17 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Full time",
+                                args.category,
                                 style: theme.textTheme.bodyLarge!
                                     .copyWith(color: Colors.black54),
                               ),
                               Text(
-                                "Data Manager",
+                                args.role,
                                 style: theme.textTheme.bodyLarge!
                                     .copyWith(color: Colors.black54),
                               ),
                               Text(
-                                "June 2023",
+                                args.date,
                                 style: theme.textTheme.bodyLarge!
                                     .copyWith(color: Colors.black54),
                               )
@@ -112,7 +114,7 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Management",
+                                    args.department,
                                     style: theme.textTheme.bodyMedium!
                                         .copyWith(color: Colors.white),
                                   ),
@@ -232,7 +234,7 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                               size: 36,
                             ),
                             Text(
-                              "Ksh.40000",
+                              "Ksh.${args.salary.toString()}",
                               style: theme.textTheme.bodyLarge!
                                   .copyWith(color: Colors.pink.shade600),
                             )
