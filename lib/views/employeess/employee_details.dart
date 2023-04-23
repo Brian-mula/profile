@@ -248,7 +248,9 @@ class _EmployeeDetailsState extends ConsumerState<EmployeeDetails> {
                   left: 100,
                   right: 100,
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/edit-employee');
+                      },
                       icon: Icon(
                         Icons.edit,
                         color: Colors.orange.shade600,
