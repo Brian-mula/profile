@@ -127,18 +127,6 @@ class _NewDepartmentState extends ConsumerState<NewDepartment> {
                                   return null;
                                 },
                               ),
-
-                              // TextFormField(
-                              //   controller: chairperson,
-                              //   decoration: fieldDecoration("Chairman"),
-                              //   validator: (value) {
-                              //     if (value == null || value.isEmpty) {
-                              //       return "provider chairperson";
-                              //     }
-                              //     return null;
-                              //   },
-                              // ),
-
                               const SizedBox(
                                 height: 30,
                               ),
