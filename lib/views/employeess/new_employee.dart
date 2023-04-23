@@ -71,57 +71,54 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                             key: _formKey,
                             child: Column(
                               children: [
-                                TextFormField(
-                                  controller: fullname,
-                                  decoration: fieldDecoration("Full name"),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "please enter full name";
-                                    }
-                                    return null;
+                                DropdownButtonFormField2(
+                                  decoration: InputDecoration(
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.zero,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Colors.orange.shade600))),
+                                  isExpanded: true,
+                                  hint: Text(
+                                    "Select category",
+                                    style: theme.textTheme.bodyMedium!.copyWith(
+                                        color: Colors.orange.shade600),
+                                  ),
+                                  items: categories
+                                      .map((cat) => DropdownMenuItem<String>(
+                                            value: cat,
+                                            child: Text(
+                                              cat,
+                                              style: theme.textTheme.bodyMedium!
+                                                  .copyWith(
+                                                      color: Colors
+                                                          .orange.shade600),
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedCat = value;
+                                    });
                                   },
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                TextFormField(
-                                  controller: idNumber,
-                                  keyboardType: TextInputType.number,
-                                  decoration: fieldDecoration("ID number"),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please fill out the ID field";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                TextFormField(
-                                  controller: phone,
-                                  keyboardType: TextInputType.phone,
-                                  decoration: fieldDecoration("Phone"),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "provide phone number";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                TextFormField(
-                                  controller: jobNumber,
-                                  keyboardType: TextInputType.text,
-                                  decoration: fieldDecoration("Job Number"),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Provide job number";
-                                    }
-                                    return null;
-                                  },
+                                  dropdownStyleData: DropdownStyleData(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(6))),
+                                  buttonStyleData: ButtonStyleData(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(6),
+                                      )),
+                                  iconStyleData: IconStyleData(
+                                      icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 30,
+                                    color: Colors.orange.shade600,
+                                  )),
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -179,6 +176,61 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                   height: 20,
                                 ),
                                 TextFormField(
+                                  controller: fullname,
+                                  decoration: fieldDecoration("Full name"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "please enter full name";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: idNumber,
+                                  keyboardType: TextInputType.number,
+                                  decoration: fieldDecoration("ID number"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Please fill out the ID field";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: phone,
+                                  keyboardType: TextInputType.phone,
+                                  decoration: fieldDecoration("Phone"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "provide phone number";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
+                                  controller: jobNumber,
+                                  keyboardType: TextInputType.text,
+                                  decoration: fieldDecoration("Job Number"),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Provide job number";
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                TextFormField(
                                   controller: salary,
                                   keyboardType: TextInputType.number,
                                   decoration: fieldDecoration("Salary"),
@@ -217,58 +269,6 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                     }
                                     return null;
                                   },
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                DropdownButtonFormField2(
-                                  decoration: InputDecoration(
-                                      isDense: true,
-                                      contentPadding: EdgeInsets.zero,
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(6)),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.orange.shade600))),
-                                  isExpanded: true,
-                                  hint: Text(
-                                    "Select category",
-                                    style: theme.textTheme.bodyMedium!.copyWith(
-                                        color: Colors.orange.shade600),
-                                  ),
-                                  items: categories
-                                      .map((cat) => DropdownMenuItem<String>(
-                                            value: cat,
-                                            child: Text(
-                                              cat,
-                                              style: theme.textTheme.bodyMedium!
-                                                  .copyWith(
-                                                      color: Colors
-                                                          .orange.shade600),
-                                            ),
-                                          ))
-                                      .toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedCat = value;
-                                    });
-                                  },
-                                  dropdownStyleData: DropdownStyleData(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6))),
-                                  buttonStyleData: ButtonStyleData(
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(6),
-                                      )),
-                                  iconStyleData: IconStyleData(
-                                      icon: Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 30,
-                                    color: Colors.orange.shade600,
-                                  )),
                                 ),
                                 const SizedBox(
                                   height: 20,
