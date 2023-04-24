@@ -100,9 +100,7 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                           ))
                                       .toList(),
                                   onChanged: (value) {
-                                    setState(() {
-                                      selectedCat = value;
-                                    });
+                                    selectedCat = value;
                                   },
                                   dropdownStyleData: DropdownStyleData(
                                       decoration: BoxDecoration(
@@ -152,9 +150,7 @@ class _NewEmployeeState extends ConsumerState<NewEmployee> {
                                           ))
                                       .toList(),
                                   onChanged: (value) {
-                                    setState(() {
-                                      selectedDep = value;
-                                    });
+                                    selectedDep = value;
                                   },
                                   dropdownStyleData: DropdownStyleData(
                                       decoration: BoxDecoration(
